@@ -238,4 +238,3 @@ isPossible = (current, matrix) => {
 ## Authors
 
 Danilo Santos [@danilopsnts](https://www.linkedin.com/in/danilopsnts/)
-<!-- branch protection test: US2 -->
