@@ -1,0 +1,32 @@
+{
+  "name": "claude-cli-alpine",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "remoteUser": "node",
+  "mounts": [
+    "source=claude-code-config,target=/home/node/.claude,type=volume",
+    "source=gh-config,target=/home/node/.config/gh,type=volume"
+  ],
+  "containerEnv": {
+    "CLAUDE_CONFIG_DIR": "/home/node/.claude",
+    "GH_TOKEN": "${localEnv:GH_TOKEN_DEVCONTAINER}",
+    "GITHUB_TOKEN": "${localEnv:GH_TOKEN_DEVCONTAINER}"
+  },
+  // faz o git (clone/push/pull via HTTPS) usar o gh como credential helper,
+  // assim ele também aproveita o GH_TOKEN acima
+  "postCreateCommand": "gh auth setup-git",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "vscjava.vscode-java-pack",
+        "anthropic.claude-code",
+        "ms-azuretools.vscode-containers",
+        "ms-python.python"
+      ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash"
+      }
+    }
+  }
+}
